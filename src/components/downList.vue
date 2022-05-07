@@ -1,6 +1,16 @@
 <template>
   <div>
     <ul class="list">
+      <li class="chooseAll">
+        <input
+          type="checkbox"
+          name="chooseAll"
+          v-model="checkedAll"
+          value="chooseAll"
+          @click="handleAllClick"
+        />
+        <div>{{ btn }}</div>
+      </li>
       <li v-for="(item, index) in newList" :key="index">
         <div class="flex listItem">
           <input
@@ -25,6 +35,8 @@ export default {
       newList: [],
       checked: [],
       lastcheckval: [],
+      checkedAll: "",
+      btn: "全选",
     };
   },
   methods: {
@@ -55,6 +67,27 @@ export default {
           if (that.checked.length == 0) {
             that.checked.push(that.lastcheckval);
           }
+        }
+        that.$emit("value1", that.checked);
+      }, 1);
+    },
+    handleAllClick() {
+      let that = this;
+      setTimeout(function () {
+        if (that.checkedAll) {
+          that.btn = "全部取消";
+          that.checked = [];
+          that.newList.forEach((item) => {
+            item.checked = true;
+
+            that.checked.push(item.data);
+          });
+        } else {
+          that.btn = "全选";
+          that.newList.forEach((item) => {
+            item.checked = false;
+            that.checked = [];
+          });
         }
         that.$emit("value1", that.checked);
       }, 1);

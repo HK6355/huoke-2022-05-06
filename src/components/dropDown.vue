@@ -59,6 +59,9 @@ input {
   margin: 0.5rem;
   box-shadow: 2px 2px 10px #6789ad;
 }
+.clearFix {
+  text-align: center;
+}
 .searchIpt {
   position: relative;
   width: 3.36rem;
